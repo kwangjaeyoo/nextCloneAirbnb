@@ -9,6 +9,9 @@ import CategoriyInput from '../inputs/CategoriyInput'
 import { FieldValues, useForm } from 'react-hook-form'
 import CountrySelect from '../inputs/CountrySelect'
 
+import dynamic from 'next/dynamic'
+import Counter from '../inputs/Counter'
+
 enum STEPS {
   CATEGORY = 0,
   LOCATION = 1,
@@ -37,7 +40,7 @@ const RentModal = () => {
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
-      imageScr: '',
+      imageSrc: '',
       price: 1,
       title: '',
       description: '',
@@ -46,6 +49,14 @@ const RentModal = () => {
 
   const category = watch('category')
   const location = watch('location')
+  const guestCount = watch('guestCount')
+  const roomCount = watch('roomCount')
+  const bathroomCount = watch('bathroomCount')
+
+  const Map = useMemo(
+    () => dynamic(() => import('../Map'), { ssr: false }),
+    [location],
+  )
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -113,16 +124,55 @@ const RentModal = () => {
         </div>
       )}
       {step == STEPS.LOCATION && (
-        <div className="flex flex-col gap-9">
+        <div className="flex flex-col gap-8">
           <Heading
             title="Where is your place located?"
             subtitle="Help guests find you!"
           />
           <CountrySelect
             value={location}
-            onChange={(value) => setCustomValue('location', value)}
+            onChange={(value) => {
+              setCustomValue('location', value)
+            }}
           />
-          <Map />
+          <Map center={location?.latlng} />
+        </div>
+      )}
+      {step == STEPS.INFO && (
+        <div className="flex flex-col gap-9">
+          <Heading
+            title="Share some basics about your place"
+            subtitle="What amenitis do you have?"
+          />
+          <Counter
+            title="Guests"
+            subtitle="How many guests do you allow?"
+            value={guestCount}
+            onChange={(value) => setCustomValue('guestCount', value)}
+          />
+          <hr />
+          <Counter
+            onChange={(value) => setCustomValue('roomCount', value)}
+            value={roomCount}
+            title="Rooms"
+            subtitle="How many rooms do you have?"
+          />
+          <hr />
+          <Counter
+            onChange={(value) => setCustomValue('bathroomCount', value)}
+            value={bathroomCount}
+            title="Bathrooms"
+            subtitle="How many bathrooms do you have?"
+          />
+        </div>
+      )}
+      {step == STEPS.IMAGES && (
+        <div className="flex flex-col gap-9">
+          <Heading
+            title="Add a photo of your place"
+            subtitle="Show guests what your place looks like!"
+          />
+          <ImageUpload />
         </div>
       )}
     </>
