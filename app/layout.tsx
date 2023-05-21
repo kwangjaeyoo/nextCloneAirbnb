@@ -20,7 +20,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const currentUser = await getCurrentUser()
-  console.log('rootLayout user => ' + JSON.stringify(currentUser))
+  // console.log('rootLayout user => ' + JSON.stringify(currentUser))
 
   return (
     <html lang="en">
@@ -33,8 +33,7 @@ export default async function RootLayout({
           <RentModal />
           <Navbar currentUser={currentUser} />
         </>
-        {/* </ClientOnly> */}
-        {children}
+        <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
   )
