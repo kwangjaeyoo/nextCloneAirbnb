@@ -1,7 +1,8 @@
 'use client'
 
-import { User } from 'next-auth'
+import { User } from '@prisma/client'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import useFavorite from '../hook/useFavorite'
 
 interface HeartButtonProps {
   listingId: string
@@ -12,11 +13,14 @@ const HeartButton: React.FC<HeartButtonProps> = ({
   listingId,
   currentUser,
 }) => {
-  const hasFavorited = false
-  const toggleFavoriate = () => {}
+  const { hasFavorited, toggleFavoite } = useFavorite({
+    listingId,
+    currentUser,
+  })
 
   return (
     <div
+      onClick={toggleFavoite}
       className="
         relative
         hover:opacity-80

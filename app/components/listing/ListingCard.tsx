@@ -84,11 +84,11 @@ const ListingCard: React.FC<ListingCardProps> = ({
             alt="Listing"
             src={data.imageSrc}
             className="
-                object-cover 
-                h-full 
-                w-full 
-                group-hover:scale-110 
-                transition
+              object-cover 
+              h-full 
+              w-full 
+              group-hover:scale-110 
+              transition
             "
           />
 

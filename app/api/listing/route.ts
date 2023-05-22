@@ -23,11 +23,8 @@ export async function POST(request: Request) {
     price,
   } = body
 
-  console.log('error 2222')
-
   Object.keys(body).forEach((value: any) => {
     if (!body[value]) {
-      console.log('error   3333 ' + value)
       NextResponse.error()
     }
   })
