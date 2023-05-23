@@ -13,8 +13,8 @@ import { useRouter } from 'next/navigation'
 import { differenceInDays, eachDayOfInterval } from 'date-fns'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { difference } from 'next/dist/build/utils'
 import ListingReservation from '@/app/components/listing/ListingReservation'
+import { SafeReservations } from '@/app/types'
 
 const initalDateRange = {
   startDate: new Date(),
@@ -23,7 +23,7 @@ const initalDateRange = {
 }
 
 interface ListingClientProps {
-  reservations?: Reservation[]
+  reservations?: SafeReservations[] | Error
   listing: Listing & { user: User }
   currentUser?: User | null
 }
@@ -36,17 +36,19 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const loginModal = useLoginModal()
   const router = useRouter()
 
-  const disableDates = useMemo(() => {
+  const disabledDates = useMemo(() => {
     let dates: Date[] = []
 
-    reservations.forEach((reservations: any) => {
-      const range = eachDayOfInterval({
-        start: new Date(reservations.startDate),
-        end: new Date(reservations.endDate),
-      })
+    if (!(reservations instanceof Error)) {
+      reservations.forEach((reservations: any) => {
+        const range = eachDayOfInterval({
+          start: new Date(reservations.startDate),
+          end: new Date(reservations.endDate),
+        })
 
-      dates = [...dates, ...range]
-    })
+        dates = [...dates, ...range]
+      })
+    }
 
     return dates
   }, [reservations])
@@ -62,7 +64,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
     setIsLoading(true)
 
     axios
-      .post('/api/reservations', {
+      .post('/api/reservation', {
         totalPrice,
         startDate: dateRange.startDate,
         endDate: dateRange.endDate,
@@ -73,8 +75,9 @@ const ListingClient: React.FC<ListingClientProps> = ({
         setDateRange(initalDateRange)
         router.refresh()
       })
-      .catch(() => {
-        toast.error('Something went wrong.')
+      .catch((error: any) => {
+        console.log('error ' + JSON.stringify(error))
+        toast.error('Something went wrong. ')
       })
       .finally(() => {
         setIsLoading(false)
@@ -141,7 +144,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
                 dateRange={dateRange}
                 onSubmit={onCreateReservation}
                 disabled={isLoading}
-                //disabledDates={disabledDates}
+                disabledDates={disabledDates}
               />
             </div>
           </div>
