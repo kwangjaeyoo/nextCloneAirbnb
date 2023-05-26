@@ -9,6 +9,11 @@ interface HomeProps {
   searchParams: IListingsParams
 }
 
+/**
+ * 클론코딩
+ * https://www.youtube.com/watch?v=c_-b_isI4vg
+ */
+
 const Home = async ({ searchParams }: HomeProps) => {
   const listing = await getListings(searchParams)
   const user = await getCurrentUser()
