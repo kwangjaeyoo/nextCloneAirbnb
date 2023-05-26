@@ -11,9 +11,9 @@ import useSearchModal from '@/app/hook/useSearchModel'
 
 import Heading from '../Heading'
 import Calendar from '../inputs/Calendar'
+import Counter from '../inputs/Counter'
 import CountrySelect, { CountrySelectValue } from '../inputs/CountrySelect'
 import Modal from './Modal'
-import Counter from '../inputs/Counter'
 
 enum STEPS {
   LOCATION = 0,
