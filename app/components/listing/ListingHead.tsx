@@ -1,7 +1,9 @@
+import Image from 'next/image'
+
 import useCountries from '@/app/hook/useCountries'
 import { User } from '@prisma/client'
+
 import Heading from '../Heading'
-import Image from 'next/image'
 import HeartButton from '../HeartButton'
 
 interface ListingHeadProps {

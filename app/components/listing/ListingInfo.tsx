@@ -1,11 +1,13 @@
 'use client'
 
+import dynamic from 'next/dynamic'
+import { IconType } from 'react-icons'
+
 import useCountries from '@/app/hook/useCountries'
 import { User } from '@prisma/client'
-import { IconType } from 'react-icons'
+
 import Avatar from '../Avatar'
 import ListingCategory from './ListingCategory'
-import dynamic from 'next/dynamic'
 
 const Map = dynamic(() => import('../Map'), {
   ssr: false,
