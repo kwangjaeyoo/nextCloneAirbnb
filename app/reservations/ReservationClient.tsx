@@ -1,14 +1,14 @@
 'use client'
 
-import { toast } from 'react-hot-toast'
 import axios from 'axios'
-import { useCallback, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useCallback, useState } from 'react'
+import { toast } from 'react-hot-toast'
 
-import { SafeReservations } from '@/app/types'
-import Heading from '@/app/components/Heading'
 import Container from '@/app/components/Container'
+import Heading from '@/app/components/Heading'
 import ListingCard from '@/app/components/listing/ListingCard'
+import { SafeReservations } from '@/app/types'
 import { User } from '@prisma/client'
 
 interface ReservationsClientProps {

@@ -1,9 +1,11 @@
-import { User } from '@prisma/client'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import useLoginModal from './useLoginModal'
 import { useCallback, useMemo } from 'react'
 import toast from 'react-hot-toast'
+
+import { User } from '@prisma/client'
+
+import useLoginModal from './useLoginModal'
 
 interface IUseFavoriteProp {
   listingId: string

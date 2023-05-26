@@ -1,13 +1,15 @@
 'use client'
 
-import { SafeReservations } from '@/app/types'
-import { User } from '@prisma/client'
-import Container from '../components/Container'
-import Heading from '../components/Heading'
+import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
-import axios from 'axios'
 import toast from 'react-hot-toast'
+
+import { SafeReservations } from '@/app/types'
+import { User } from '@prisma/client'
+
+import Container from '../components/Container'
+import Heading from '../components/Heading'
 import ListingCard from '../components/listing/ListingCard'
 
 interface TripsClientProps {
