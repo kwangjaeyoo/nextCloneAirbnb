@@ -1,7 +1,6 @@
 'use client'
 
 import axios from 'axios'
-
 import useLoginModal from '@/app/hook/useLoginModal'
 import useRegisterModal from '@/app/hook/useRegisterModal'
 import { useCallback, useState } from 'react'
@@ -38,7 +37,9 @@ const RegisterModal = () => {
     axios
       .post('/api/register', data)
       .then(() => {
+        toast.success('register success')
         registerModal.onClose()
+        loginModal.onOpen()
       })
       .catch((error) => {
         console.log(error)

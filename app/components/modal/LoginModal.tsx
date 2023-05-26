@@ -13,7 +13,6 @@ import Button from '../Button'
 import Heading from '../Heading'
 import Input from '../inputs/Input'
 import Modal from './Modal'
-import RegisterModal from './RegisterModal'
 
 const LoginModal = () => {
   const router = useRouter()
