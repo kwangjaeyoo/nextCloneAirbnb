@@ -1,11 +1,14 @@
-import { Nunito } from 'next/font/google'
-import Navbar from './components/navber/Navber'
 import './globals.css'
-import RegisterModal from './components/modal/RegisterModal'
-import ToasterProvider from './provider/ToasterProvider'
-import LoginModal from './components/modal/LoginModal'
+
+import { Nunito } from 'next/font/google'
+
 import getCurrentUser from './actions/getCurrentUser'
+import LoginModal from './components/modal/LoginModal'
+import RegisterModal from './components/modal/RegisterModal'
 import RentModal from './components/modal/RentModal'
+import SearchModal from './components/modal/SearchModal'
+import Navbar from './components/navber/Navber'
+import ToasterProvider from './provider/ToasterProvider'
 
 export const metadata = {
   title: 'airbnb',
@@ -27,6 +30,7 @@ export default async function RootLayout({
       <body className={font.className}>
         {/* <ClientOnly> 하이드레이션 error fix 라고 하는데 발생하지 않음.*/}
         <>
+          <SearchModal />
           <ToasterProvider />
           <LoginModal />
           <RegisterModal />
